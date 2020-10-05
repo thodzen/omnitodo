@@ -7,7 +7,11 @@
       <input matInput
              formControlName="name"
              placeholder="Take out the trash">
-      <mat-hint align="end">(put some interesting stuff here)</mat-hint>
+      <mat-hint align="end">
+        <span *ngIf="name.errors?.required">This is required</span>
+        <span *ngIf="name.errors?.maxlength">This is too long. Make it less than
+          {{name.errors.maxlength.requiredLength}} characters</span>
+      </mat-hint>
     </mat-form-field>
   </div>
   <div>
@@ -29,14 +33,16 @@
       <mat-label>Project</mat-label>
       <mat-select>
         <mat-option value=""></mat-option>
-        <mat-option value="Work">Work</mat-option>
-        <mat-option value="Home">Home</mat-option>
+        <mat-option *ngFor="let project of projects$ | async"
+                    value="{{project.id}}">{{project.name}}</mat-option>
+
 
       </mat-select>
     </mat-form-field>
   </div>
   <div>
     <button mat-button
+            [disabled]="form.invalid"
             (click)="submit()">Submit</button>
     <button mat-button
             (click)="cancel()">Cancel</button>

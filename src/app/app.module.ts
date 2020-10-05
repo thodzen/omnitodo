@@ -21,6 +21,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers } from './reducers';
 const materialModules = [
   MatSidenavModule,
   MatToolbarModule,
@@ -49,7 +53,9 @@ const materialModules = [
     AppRoutingModule,
     BrowserAnimationsModule,
     ...materialModules, // listing out the modules from materialModules
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [],
   bootstrap: [AppComponent]

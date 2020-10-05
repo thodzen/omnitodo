@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { ProjectListModel } from 'src/app/models';
+import { AppState, selectProjectListModel } from '../../reducers';
 
 @Component({
   selector: 'app-todo-entry',
@@ -10,8 +14,11 @@ import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 export class TodoEntryComponent implements OnInit {
 
   form: FormGroup;
-  constructor(private bottomSheetRef: MatBottomSheetRef<TodoEntryComponent>,
-    private formBuilder: FormBuilder
+  projects$: Observable<ProjectListModel[]>;
+  constructor(
+    private bottomSheetRef: MatBottomSheetRef<TodoEntryComponent>,
+    private formBuilder: FormBuilder,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
@@ -19,9 +26,14 @@ export class TodoEntryComponent implements OnInit {
       name: ['', [Validators.required, Validators.maxLength(200)]],
       project: [],
       dueDate: []
-    })
+    });
+
+    this.projects$ = this.store.pipe(
+      select(selectProjectListModel)
+    );
   }
 
+  get name(): AbstractControl { return this.form.get('name'); }
   cancel(): void {
     this.bottomSheetRef.dismiss();
   }
