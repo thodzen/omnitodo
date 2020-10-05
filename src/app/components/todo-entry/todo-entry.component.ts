@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { todoAdded } from 'src/app/actions/todo-actions';
 import { ProjectListModel } from 'src/app/models';
 import { AppState, selectProjectListModel } from '../../reducers';
 
@@ -40,7 +41,7 @@ export class TodoEntryComponent implements OnInit {
 
   submit(): void {
     // validate the data
-    // dispatch an action to the store, etc.
+    this.store.dispatch(todoAdded({ ...this.form.value }));
     this.bottomSheetRef.dismiss();
   }
 }

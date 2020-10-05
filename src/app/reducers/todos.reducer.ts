@@ -1,5 +1,6 @@
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
-import { createReducer, Action } from '@ngrx/store';
+import { createReducer, Action, on } from '@ngrx/store';
+import * as actions from '../actions/todo-actions';
 
 export interface TodoEntity {
   id: string;
@@ -27,7 +28,8 @@ const initialState: TodoState = {
 };
 
 const reducerFunction = createReducer(
-  initialState
+  initialState,
+  on(actions.todoAdded, (oldState, action) => adapter.addOne(action.payload, oldState))
 );
 
 export function reducer(state: TodoState = initialState, action: Action) {

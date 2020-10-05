@@ -25,9 +25,17 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './reducers';
+import { ForecastComponent } from './components/forecast/forecast.component';
+import { InboxComponent } from './components/inbox/inbox.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { ListComponent } from './components/list/list.component';
+import { MatDialogModule } from '@angular/material/dialog';
 const materialModules = [
   MatSidenavModule,
+  MatDialogModule,
   MatToolbarModule,
+  MatChipsModule,
   MatListModule,
   MatIconModule,
   MatCardModule,
@@ -37,7 +45,7 @@ const materialModules = [
   MatInputModule,
   MatSelectModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
 ];
 
 @NgModule({
@@ -46,7 +54,11 @@ const materialModules = [
     NavComponent,
     DashboardComponent,
     TodoEntryComponent,
-    ActionsComponent
+    ActionsComponent,
+    ForecastComponent,
+    InboxComponent,
+    ProjectsComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
