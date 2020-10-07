@@ -22,6 +22,35 @@ export const todoAdded = createAction(
   })
 );
 
+// Success
+export const todoAddedSuccessfully = createAction(
+  '[todos] todo added successfully',
+  props<{ oldId: string, payload: TodoEntity }>()
+);
+
+// Failure
+export const todoAddedFailure = createAction(
+  '[todos] todo added failure',
+  props<{ message: string, payload: TodoEntity }>()
+);
+
+// Command
+export const loadTodos = createAction(
+  '[todos] load todo data'
+);
+
+// Success
+export const loadDataSucceeded = createAction(
+  '[todos] loaded data successfully',
+  props<{ payload: TodoEntity[] }>()
+);
+
+// Failure
+export const loadDataFailure = createAction(
+  '[todos] loading data failed',
+  props<{ message: string }>()
+);
+
 interface TodoCreate {
   name: string;
   dueDate?: string;
