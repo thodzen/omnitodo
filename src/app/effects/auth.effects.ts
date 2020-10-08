@@ -45,6 +45,16 @@ export class AuthEffects {
       )
     ), { dispatch: true }
   );
+
+  // if they log out successfully, take them to the login screen.
+  logoutRedirect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.logoutSuccess),
+      tap(() => this.router.navigate(['login']))
+
+    ), { dispatch: false }
+  );
+
   constructor(
     private router: Router,
     private actions$: Actions,
